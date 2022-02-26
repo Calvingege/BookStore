@@ -1,35 +1,47 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Book;
 
 class BooksController extends Controller
 {
     public function createBook(){
-        return view('createBook');
-    }
+    return view('createBook');
+    
+}
 
     public function storeBook(Request $request){
-        Book::create([
-            'bookTitle' => $request->bookTitle,
-            'releaseDate' => $request->releaseDate,
-            'author' => $request->author,
-            'genre' => $request->genre
+        $request->validate([
+            'bookTitle' => 'required|min:5|max:20', 
+            'releaseDate' => 'required|numeric|min:2000|max:2021',
+            'author' => 'required|min:5|max:20',
+            'totalPages' => 'required|numeric|min:1'
         ]);
-        
-        return redirect('/');
+        // masukan ke database
+        Book::create([
+            'bookTitle' => $request->bookTitle, // judul buku 
+            'releaseDate' => $request->releaseDate, // tahun terbit 
+            'author' => $request->author, // penulis buku 
+            'totalPages' => $request->totalPages // jumlah halaman
+        ]);
+
+        // masukan ke databse
+        // books::create($request->all());
+
+        // redirect ke show/books
+        return redirect('/show/books'); 
     }
 
-    public function showBook(){
-        $books = Book::all();
-        return view('showBooks', compact('books'));
+    public function showBook(){ // redirect ke store books 
+        $books = Book::all(); // buat ambil semua data dari model
+        return view('showBooks', compact('books')); // compact buat ngasih variable yang nama nya sama dengan yang di compact itu. 
+
     }
 
     public function formUpdateBook($id){
-        $book = Book::findOrFail($id);
-        return view('updateBook', compact('book'));
+        $books = Book::findOrFail($id);
+        return view('updateBook', compact('books'));
     }
 
     public function updateBook($id, Request $request){
@@ -37,9 +49,8 @@ class BooksController extends Controller
             'bookTitle' => $request->bookTitle,
             'releasedDate' => $request->releasedDate,
             'author' => $request->author,
-            'genre' => $request->genre
+            'totalPages' => $request->totalPages
         ]);
-
         return redirect('/show/books');
     }
 

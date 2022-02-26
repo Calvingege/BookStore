@@ -8,25 +8,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-    <form action="{{route('updateBook', $book->id)}}" method="POST">
+    <form action="{{route('updateBook', $books->id)}}" method="POST">
         @csrf
         @method('PATCH')
         <h1>Update Book</h1>
         <div class="mb-3">
             <label for="bookTitle" class="form-label">Book Title</label>
-            <input type="text" class="form-control" id="bookTitle" name="bookTitle" value="{{$book->bookTitle}}">
+            <input type="text" class="form-control" id="bookTitle" name="bookTitle" value="{{$books->bookTitle}}">
           </div>
           <div class="mb-3">
             <label for="releaseDate" class="form-label">Release Date</label>
-            <input type="date" class="form-control" id="releaseDate" name="releaseDate" value="{{$book->releaseDate}}">
+            <input type="text" class="form-control" id="releaseDate" name="releaseDate" value="{{$books->releaseDate}}">
           </div>
           <div class="mb-3">
               <label for="author" class="form-label">Author</label>
-              <input type="text" class="form-control" id="author" name="author" value="{{$book->author}}">
+              <input type="text" class="form-control" id="author" name="author" value="{{$books->author}}">
           </div>
           <div class="mb-3">
-              <label for="genre" class="form-label">Genre</label>
-              <input type="text" class="form-control" id="genre" name="genre" value="{{$book->genre}}">
+              <label for="totalPages" class="form-label">Total Pages</label>
+              <input type="text" class="form-control" id="totalPages" name="totalPages" value="{{$books->totalPages}}">
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
           

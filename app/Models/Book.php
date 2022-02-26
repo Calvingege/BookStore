@@ -13,6 +13,6 @@ class Book extends Model
         'bookTitle',
         'releaseDate',
         'author',
-        'genre',
+        'totalPages',
     ];
 }
